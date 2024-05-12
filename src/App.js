@@ -1,16 +1,17 @@
-import logo from './logo.svg';
-import './App.css';
+/* App.js */
+import { Route, Routes } from "react-router-dom";
+import BoardList from "./routes/BoardList";
+import Home from "./routes/Home";
+import React from "react";
+import Login from "./routes/Login";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          아혀니가 보고싶은 불쌍한 창섭이 ㅠㅠ
-        </p>
-      </header>
-    </div>
+    <Routes>
+      <Route path="/" element={<Login/>} />
+      <Route path="/home" element={<Home/>} />
+      <Route path="/board" element={<BoardList/>} />
+    </Routes>
   );
 }
 

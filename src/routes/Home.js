@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Header from "../layout/Header";
+import Constants from "../constants/Constants";
 
 function Home() {
   const [data, setData] = useState([]);
@@ -11,7 +12,8 @@ function Home() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get('http://54.180.237.91:50031/who-is-poor');
+      const url = Constants.BASE_URL + '/who-is-poor'
+      const response = await axios.get(url);
       setData(response.data);
     } catch (error) {
       console.error('Error fetching data:', error);

@@ -11,7 +11,7 @@ function Home() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get('http://localhost:50031/who-is-poor');
+      const response = await axios.get('http://54.180.237.91:50031/who-is-poor');
       setData(response.data);
     } catch (error) {
       console.error('Error fetching data:', error);

@@ -20,6 +20,12 @@ function Home() {
     }
   };
 
+  const addPoorWeight = async (name) => {
+    const url = Constants.BASE_URL + `/poor/${name}`
+    await axios.post(url);
+    window.location.reload();
+  }
+
   return (
     <div>
       <Header />
@@ -27,6 +33,12 @@ function Home() {
       <ul>
         불쌍한 사람: {data}
       </ul>
+      <div style={{marginTop: '0.2em', display: 'block'}}>
+        <button onClick={() => addPoorWeight('SHOWB')}>창섭이가 더 불쌍해</button>
+      </div>
+      <div style={{marginTop: '0.2em', display: 'block'}}>
+        <button onClick={() => addPoorWeight('SUZY')}>아현이가 더 불쌍해</button>
+      </div>
     </div>
   );
 }

@@ -4,10 +4,12 @@ import Header from "../layout/Header";
 import Constants from "../constants/Constants";
 
 function Home() {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState('');
+  const [list, setList] = useState({});
 
   useEffect(() => {
     fetchData();
+    initCount();
   }, []);
 
   const fetchData = async () => {
@@ -20,6 +22,17 @@ function Home() {
     }
   };
 
+  const initCount = async () => {
+    try {
+      const url = Constants.BASE_URL + '/poor/list'
+      const response = await axios.get(url);
+      console.log(response);
+      setList(response.data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  }
+
   const addPoorWeight = async (name) => {
     const url = Constants.BASE_URL + `/poor/${name}`
     await axios.post(url);
@@ -28,8 +41,15 @@ function Home() {
 
   return (
     <div>
-      <Header />
+      <Header/>
       <h1>홈 화면</h1>
+      <h2>불쌍함 수치</h2>
+      {Object.entries(list).map(([name, value]) => (
+        <ul key={name}>
+          {name}: {value}
+        </ul>
+      ))}
+      <h2>현재 결과</h2>
       <ul>
         불쌍한 사람: {data}
       </ul>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import axiosInstance from '../api/axiosInstance';
 import Header from "../layout/Header";
 import Constants from "../constants/Constants";
 
@@ -15,7 +15,7 @@ function Home() {
   const fetchData = async () => {
     try {
       const url = Constants.BASE_URL + '/who-is-poor'
-      const response = await axios.get(url);
+      const response = await axiosInstance.get(url);
       setData(response.data);
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -25,7 +25,7 @@ function Home() {
   const initCount = async () => {
     try {
       const url = Constants.BASE_URL + '/poor/list'
-      const response = await axios.get(url);
+      const response = await axiosInstance.get(url);
       console.log(response);
       setList(response.data);
     } catch (error) {
@@ -35,7 +35,7 @@ function Home() {
 
   const addPoorWeight = async (name) => {
     const url = Constants.BASE_URL + `/poor/${name}`
-    await axios.post(url);
+    await axiosInstance.post(url);
     window.location.reload();
   }
 

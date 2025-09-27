@@ -1,44 +1,80 @@
 import React, { useState } from 'react';
 import './Login.css'; // 스타일 파일 불러오기
 import { useNavigate } from 'react-router-dom';
+import axiosInstance from '../api/axiosInstance';
+import Constants from '../constants/Constants';
 
 function Login() {
-  const [username, setUsername] = useState('');
+  const [loginId, setLoginId] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleLoginIdChange = (e) => {
+    setLoginId(e.target.value);
+    setErrorMessage('');
+  };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+    setErrorMessage('');
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // 여기에 로그인 처리 로직을 추가하세요
-    navigate('/home');
-    console.log('Username:', username);
-    console.log('Password:', password);
+
+    if (!loginId || !password) {
+      setErrorMessage('아이디와 비밀번호를 모두 입력해주세요.');
+      return;
+    }
+
+    try {
+      const response = await axiosInstance.post(`${Constants.BASE_URL}/user/v1/login`, {
+        loginId,
+        password,
+      });
+
+      if (response.status === 200) {
+        const { accessToken, refreshToken } = response.data;
+        localStorage.setItem('accessToken', accessToken);
+        localStorage.setItem('refreshToken', refreshToken);
+        navigate('/home');
+      }
+    } catch (error) {
+      console.error('Login failed:', error);
+      setErrorMessage('로그인에 실패했습니다. 아이디와 비밀번호를 확인해주세요.');
+    }
   };
 
   return (
-    <div className="login-form-container">
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="username">Username</label>
-          <input
-            type="text"
-            id="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        <button type="submit">Login</button>
-      </form>
+    <div className="login-container">
+      <div className="login-form">
+        <h2>Login</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label htmlFor="loginId">ID</label>
+            <input
+              type="text"
+              id="loginId"
+              value={loginId}
+              onChange={handleLoginIdChange}
+              placeholder="Enter your username"
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              value={password}
+              onChange={handlePasswordChange}
+              placeholder="Enter your password"
+            />
+          </div>
+          {errorMessage && <p className="error-message">{errorMessage}</p>}
+          <button type="submit" className="login-button">Login</button>
+        </form>
+      </div>
     </div>
   );
 }

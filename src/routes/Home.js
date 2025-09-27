@@ -57,8 +57,7 @@ function Home() {
         <button onClick={() => addPoorWeight('SHOWB')}>창섭이가 더 불쌍해</button>
       </div>
       <div style={{marginTop: '0.2em', display: 'block'}}>
-        <button onClick={() => addPoorWeight('SHOWB')}>창섭이가 더 불쌍해</button>
-        {/*<button onClick={() => addPoorWeight('SUZY')}>아현이가 더 불쌍해</button>*/}
+        <button onClick={() => addPoorWeight('SUZY')}>아현이가 더 불쌍해</button>
       </div>
     </div>
   );

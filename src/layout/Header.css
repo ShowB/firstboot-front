@@ -34,6 +34,7 @@
 
 .header nav li {
   margin: 0 1.25rem; /* 20px */
+  position: relative;
 }
 
 .header nav a {
@@ -41,14 +42,22 @@
   text-decoration: none;
   font-size: 1rem; /* 16px */
   transition: color 0.3s;
+  display: block;
+  padding: 1.25rem 0; /* 20px 0 */
 }
 
 .header nav a:hover {
   color: #3498db;
 }
 
-.header nav li.active a {
-  font-weight: bold;
+.header nav li.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0.3125rem; /* 5px */
+  left: 0;
+  width: 100%;
+  height: 0.25rem; /* 4px */
+  background-color: #87CEEB;
 }
 
 .gnb-wrapper {

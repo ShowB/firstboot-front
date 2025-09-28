@@ -1,25 +1,28 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import Header from '../layout/Header';
-import Sidebar from '../layout/Sidebar';
 import MainContent from '../layout/MainContent';
-import './Home.css'; // Assuming Home.css has the layout styles
+import './Home.css';
 
-function BoardList() {
+function MyPage() {
   const location = useLocation();
+  const loginId = location.state?.loginId;
 
   return (
     <div className="home-container">
       <Header />
       <div className="main-layout">
-        <Sidebar menuKey='board' location={location} />
         <MainContent>
-          <h2>Board Page</h2>
-          {/* 게시판 페이지 내용 */}
+          <h2>My Page</h2>
+          {loginId ? (
+            <p>Your Login ID is: {loginId}</p>
+          ) : (
+            <p>Login ID not found.</p>
+          )}
         </MainContent>
       </div>
     </div>
   );
 }
 
-export default BoardList;
+export default MyPage;

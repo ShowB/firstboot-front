@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Login.css'; // 스타일 파일 불러오기
 import { useNavigate } from 'react-router-dom';
-import axiosInstance from '../api/axiosInstance';
+import axiosInstance from '../api/AxiosInstance';
 import Constants from '../constants/Constants';
 
 function Login() {
@@ -9,6 +9,13 @@ function Login() {
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem('accessToken');
+    if (token) {
+      navigate('/home');
+    }
+  }, [navigate]);
 
   const handleLoginIdChange = (e) => {
     setLoginId(e.target.value);

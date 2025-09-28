@@ -1,0 +1,6 @@
+.main-content {
+  flex-grow: 1;
+  padding: 1.875rem; /* 30px */
+  background-color: #ffffff;
+  overflow-y: auto;
+}

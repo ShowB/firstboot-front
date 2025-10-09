@@ -26,6 +26,15 @@ const menuConfig = {
       },
     ],
   },
+  partner: {
+    title: 'Partner',
+    menus: [
+      {
+        name: '파트너관리',
+        sub: ['파트너관리'],
+      },
+    ],
+  },
 };
 
 export default menuConfig;

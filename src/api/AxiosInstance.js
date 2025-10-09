@@ -1,7 +1,7 @@
 import axios from 'axios';
 import Constants from "../constants/Constants";
 
-const axiosInstance = axios.create();
+const axiosInstance = axios.create({ baseURL: Constants.BASE_URL });
 
 let isRefreshing = false;
 let failedQueue = [];

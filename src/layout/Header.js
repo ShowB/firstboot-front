@@ -22,6 +22,9 @@ function Header() {
           <li className={location.pathname === '/minigame' ? 'active' : ''}>
             <Link to="/minigame">미니게임</Link>
           </li>
+          <li className={location.pathname === '/partner' ? 'active' : ''}>
+            <Link to="/partner">파트너관리</Link>
+          </li>
         </ul>
       </nav>
       <div className="gnb-wrapper">

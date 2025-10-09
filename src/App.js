@@ -6,6 +6,7 @@ import React from "react";
 import Login from "./routes/Login";
 import Minigame from "./routes/Minigame";
 import MyPage from "./routes/MyPage";
+import Partner from "./routes/Partner";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Route path="/board" element={<BoardList/>} />
       <Route path="/minigame" element={<Minigame/>} />
       <Route path="/mypage" element={<MyPage/>} />
+      <Route path="/partner" element={<Partner/>} />
     </Routes>
   );
 }

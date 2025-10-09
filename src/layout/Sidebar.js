@@ -27,6 +27,9 @@ function Sidebar({ menuKey, location }) {
     if (mainKey === 'minigame') {
       if (subItem === '불쌍한 사람 찾기') return '/minigame';
     }
+    if (mainKey === 'partner') {
+      if (subItem === '파트너관리') return '/partner';
+    }
     return '#';
   };
 
